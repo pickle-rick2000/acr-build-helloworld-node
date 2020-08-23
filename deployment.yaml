@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: deployment
+metadata:
+    name: nodeapp
+specs:
+    replicas: 3
+    template:
+        metadata:
+            labels:
+                name: nodeapp
+        specs:
+            containers:
+                - name: nodeapp
+                  image: jhonytest.azurecr.io/shani:v1
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - containerPort: 3000
+                  env:
+                    - name: BUCKETNAME
+                      valueFrom:
+                        configMapKeyRef:
+                            name: acr
+                            key: bucketname
