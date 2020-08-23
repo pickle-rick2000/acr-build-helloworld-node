@@ -1,6 +1,6 @@
-FROM node:9-alpine
+from node:alpine
+copy package.json package.json
+run npm install
 
-COPY . /src
-RUN cd /src && npm install
-EXPOSE 80
-CMD ["node", "/src/server.js"]
+copy . .
+cmd ["npm","start"]
